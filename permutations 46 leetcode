@@ -1,0 +1,25 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        // Initialize two empty list and index
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        int index = 0;
+        perm(result, list, index, nums);
+        return result;
+    }
+
+    static void perm(List<List<Integer>> result, List<Integer> list, int index, int[] nums) {
+        // Stop the recursion when it reach its length
+        if (index >= nums.length) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+
+        // Insert the value into all possible index
+        for (int i = 0; i < index + 1; i++) {
+            list.add(i, nums[index]);
+            perm(result, list, index + 1, nums);
+            list.remove(i); // Remove the value in the index while backtracking
+        }
+    }
+}
